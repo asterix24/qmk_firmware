@@ -46,4 +46,4 @@ AUDIO_ENABLE = no           # Audio output on port C6
 FAUXCLICKY_ENABLE = no      # Use buzzer to emulate clicky switches
 
 DEFAULT_FOLDER = isokey
-LAYOUTS = ortho_1x1
+LAYOUTS = all

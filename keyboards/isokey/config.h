@@ -26,12 +26,11 @@
 #define DESCRIPTION     Fully Orthometric keyboard
 
 /* key matrix size */
-#define MATRIX_ROWS 1
-#define MATRIX_COLS 1
+#define MATRIX_ROWS 6
+#define MATRIX_COLS 23
 
-#define MATRIX_ROW_PINS { A6 }
-#define MATRIX_COL_PINS { B10 }
-#define UNUSED_PINS
+#define MATRIX_ROW_PINS { C0, C1, C2, C3, C12, C5 }
+#define MATRIX_COL_PINS { A0, A1, A4, A5, A6, A7, B0, B1, B3, B4, B5, B6, B7, B8, B9, B12, B13, B14, B15, C6, C7 }
 
 #define DIODE_DIRECTION COL2ROW
 
