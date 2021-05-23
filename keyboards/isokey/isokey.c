@@ -16,3 +16,15 @@
  *
  */
 #include "isokey.h"
+#include "print.h"
+#include "lp5569.h"
+#include "eeprom_driver.h"
+
+void keyboard_post_init_user(void) {
+    debug_enable = true;
+    debug_matrix = true;
+    debug_keyboard=true;
+    // debug_mouse=true;
+    lp5569_init();
+    lp5569_update(15);
+}

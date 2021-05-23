@@ -2,9 +2,9 @@
 
 Custom handwired one key keyboard.
 
-Keyboard Maintainer: QMK Community  
-Hardware Supported: bluepill, Elite-C, Pro Micro, Proton C, Teensy 2.0, Teensy++ 2.0, Teensy LC, Teensy 3.2  
-Hardware Availability: 
+Keyboard Maintainer: QMK Community
+Hardware Supported: bluepill, Elite-C, Pro Micro, Proton C, Teensy 2.0, Teensy++ 2.0, Teensy LC, Teensy 3.2
+Hardware Availability:
 
 **See each individual board for pin infomation**
 
