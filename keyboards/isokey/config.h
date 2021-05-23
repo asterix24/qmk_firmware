@@ -18,21 +18,38 @@
 #pragma once
 
 /* USB Device descriptor parameter */
-#define VENDOR_ID       0xFEED
-#define PRODUCT_ID      0xCAFE
-#define DEVICE_VER      0x0003
-#define MANUFACTURER    IsoKey <asterix24@gmail.com>
-#define PRODUCT         isokey
-#define DESCRIPTION     Fully Orthometric keyboard
+#define VENDOR_ID 0xFEED
+#define PRODUCT_ID 0xCAFE
+#define DEVICE_VER 0x0003
+#define MANUFACTURER IsoKey <asterix24@gmail.com>
+#define PRODUCT isokey
+#define DESCRIPTION Fully Orthometric keyboard
 
 /* key matrix size */
 #define MATRIX_ROWS 6
 #define MATRIX_COLS 23
 
-#define MATRIX_ROW_PINS { C0, C1, C2, C3, C12, C5 }
-#define MATRIX_COL_PINS { A0, A1, A4, A5, A6, A7, B0, B1, B3, B4, B5, B6, B7, B8, B9, B12, B13, B14, B15, C6, C7 }
+#define MATRIX_ROW_PINS \
+    { A0, A1, A2, A3, A4, A5 }
+#define MATRIX_COL_PINS \
+/*   0    , 1   , 2   , 3  , 4  , 5  , 6  , 7  , 8   , 9  , 10 , 11  , 12 , 13  , 14 , 15 , 16 , 17 , 18  , 19  , 20  , 21  , 22    */ \
+    { C13 , C14 , C15 , B9 , B8 , B5 , B4 , A6 , A15 , A7 , B3 , B12 , B0 , A10 , B1 , A8 , A8 , A8 , B10 , B15 , B14 , B13 , B12 }
+//{ A8 , A8  , A8  , A8 , A8 , A8 , A8 , A8 , A8  , A8 , A8  , A8  , A8 , A8  , A8 , A8 , A8 , A8 , B10 , B15 , B14 , B13 , B12 }
 
 #define DIODE_DIRECTION COL2ROW
 
 /* Set 0 if debouncing isn't needed */
-#define DEBOUNCE    5
+#define DEBOUNCE 5
+
+#define I2C_DRIVER I2CD1
+#define I2C1_SCL_BANK GPIOB
+#define I2C1_SCL 6
+#define I2C1_SCL_PAL_MODE 4
+#define I2C1_SDA_BANK GPIOB
+#define I2C1_SDA 7
+#define I2C1_SDA_PAL_MODE 4
+
+
+#define EEPROM_I2C_24LC128
+
+
