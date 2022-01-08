@@ -12,18 +12,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Copyright 2023 Daniele Basile <asterix24@gmail.com>
+ * Copyright 2022 Daniele Basile <asterix24@gmail.com>
  *
  */
-#include "isokey.h"
-#include "settings.h"
-#include "leds_efx.h"
+#pragma once
 
-void keyboard_post_init_user(void) {
-    debug_enable = true;
-    //debug_matrix = true;
-    //debug_keyboard=true;
+#include_next <mcuconf.h>
 
-    leds_efx_init();
-    settings_init();
-}
+#undef STM32_I2C_USE_I2C1
+#define STM32_I2C_USE_I2C1 TRUE
+

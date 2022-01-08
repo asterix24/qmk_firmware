@@ -15,15 +15,28 @@
  * Copyright 2023 Daniele Basile <asterix24@gmail.com>
  *
  */
-#include "isokey.h"
+
 #include "settings.h"
-#include "leds_efx.h"
+#include "keycode.h"
 
-void keyboard_post_init_user(void) {
-    debug_enable = true;
-    //debug_matrix = true;
-    //debug_keyboard=true;
+const isokey_key_t isokey_key_table[] = {
+    /* M1_SW */ {1, 50, {KC_PMNS}},
+    /* M2_SW */ {1, 50, {KC_PPLS}},
+    /* M3_SW */ {2, 50, {KC_M, KC_S}},  // EDA_MS , // move selected
+    /* M4_SW */ {2, 50, {KC_S, KC_I}},  // EDA_SI , // Selction inside
+    /* M5_SW */ {2, 50, {KC_S, KC_L}},  // EDA_SL , // Selection line
+    /* M6_SW */ {1, 50, {KC_DEL}},
+    /* M7_SW */ {3, 50, {KC_T, KC_O, KC_L}},  // EDA_TOL , // Component Arrange group
+    /* M8_SW */
+    {3,
+     50,
+     {
+         KC_T,
+         KC_G,
+         KC_A,
+     }},                                // EDA_TGA, // Repoure All
+    /* FN_SW */ {0, 0, {KC_LSFT }},
+    /* END  {0, 0, {}}, */
+};
 
-    leds_efx_init();
-    settings_init();
-}
+void settings_init(void) { }

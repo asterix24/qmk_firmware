@@ -12,18 +12,26 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Copyright 2023 Daniele Basile <asterix24@gmail.com>
+ * Copyright 2023 Daniele Basile <asteri24@gmail.com>
  *
  */
-#include "isokey.h"
-#include "settings.h"
+
+/** \brief Lock LED update callback - keyboard level
+ *
+ * \return Ignored for now.
+ */
+
+#include "led.h"
 #include "leds_efx.h"
+#include "print.h"
 
-void keyboard_post_init_user(void) {
-    debug_enable = true;
-    //debug_matrix = true;
-    //debug_keyboard=true;
+bool led_update_kb(led_t led_state) {
+  uprintf("cl[%d] nl[%d] bs[%d]\n", led_state.caps_lock, led_state.num_lock, led_state.scroll_lock);
 
-    leds_efx_init();
-    settings_init();
+  leds_efx_setLed(LED_CAPS_LOCK, led_state.caps_lock);
+  leds_efx_setLed(LED_NUM_LOCK, led_state.num_lock);
+  leds_efx_setLed(LED_SCROLL_LOCK, led_state.scroll_lock);
+
+  return true;
 }
+
