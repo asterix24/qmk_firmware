@@ -20,5 +20,3 @@ SRC += i2c_master.c \
 	   leds_efx.c \
 	   settings.c \
 	   #
-
-EEPROM_DRIVER = i2c
