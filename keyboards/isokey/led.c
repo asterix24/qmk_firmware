@@ -25,13 +25,14 @@
 #include "leds_efx.h"
 #include "print.h"
 
-bool led_update_kb(led_t led_state) {
-  uprintf("cl[%d] nl[%d] bs[%d]\n", led_state.caps_lock, led_state.num_lock, led_state.scroll_lock);
+bool led_update_user(led_t led_state) {
 
   leds_efx_setLed(LED_CAPS_LOCK, led_state.caps_lock);
   leds_efx_setLed(LED_NUM_LOCK, led_state.num_lock);
   leds_efx_setLed(LED_SCROLL_LOCK, led_state.scroll_lock);
 
-  return true;
+  uprintf("cl[%d] nl[%d] bs[%d]\n", led_state.caps_lock, led_state.num_lock, led_state.scroll_lock);
+
+  return false;
 }
 

@@ -48,7 +48,11 @@ extern const uint8_t uno_addr[3];
 extern const uint8_t due[80];
 extern const uint8_t due_addr[3];
 
+extern const uint8_t addr_isokey_left[3];
+extern const uint8_t isokey_left[80];
+
 void leds_efx_LoadPrg(isokey_led_dev_t dev, const uint8_t *prg, size_t prg_len, const uint8_t *prg_addr, size_t prg_addr_len);
+void leds_efx_mgr(uint8_t prog, uint8_t enable);
 void leds_efx_setLed(isokey_led_t led, uint8_t status);
 void leds_efx_update(uint8_t level);
 void leds_efx_levelUp(void);

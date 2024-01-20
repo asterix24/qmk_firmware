@@ -36,6 +36,14 @@ const uint8_t due[] = {
   0x66,0x00,0xA0,0x02 ,0xC0 ,0x00 ,0x00 ,0x00 ,0x00 ,0x00 ,0x00 ,0x00 ,0x00 ,0x00 ,0x00 ,0x00,
 };
 
+const uint8_t isokey_left[] = {
+0x00,0x01,0x00,0x02,0x00,0x04,0x00,0x08,0x00,0x10,0x00,0x20,0x00,0x40,0x00,0x80,
+0x01,0x00,0x01,0xFF,0x9F,0x89,0x28,0x64,0x29,0x64,0x5A,0x00,0x9C,0x00,0x9C,0x88,
+0x40,0x00,0x9D,0x80,0x40,0x05,0x9D,0x80,0x40,0x14,0x9D,0x80,0x40,0x50,0x9D,0xC0,
+0x9D,0xC0,0x48,0x00,0xA0,0x06,0xC0,0x00,0xC0,0x00,0xC0,0x00,0x00,0x00,0x00,0x00,
+};
+const uint8_t addr_isokey_left[] = {0x0A,0x1C,0x1D};
+
 static uint8_t default_level = 200;
 
 static const struct {
@@ -44,20 +52,21 @@ static const struct {
   uint8_t pwm1;
   uint8_t pwm2;
 } led_map[] = {
-  {TML_LEFT_ADDR  , REG_D0_PWM , REG_D1_PWM , REG_D2_PWM} , /* LED_EXTRA_M0_RGB led 0        , 1  , 2 */
-  {TML_LEFT_ADDR  , REG_D3_PWM , REG_D4_PWM , REG_D5_PWM} , /* LED_EXTRA_M1_RGB led 3        , 4  , 5 */
-  {TML_LEFT_ADDR  , REG_D6_PWM , REG_D7_PWM , REG_D8_PWM} , /* LED_EXTRA_M2_RGB: // led 6    , 7  , 8 */
-  {TML_RIGHT_ADDR , REG_D3_PWM , 0          , 0}          , /* LED_CAPS_LOCK: // led 12 */
-  {TML_RIGHT_ADDR , REG_D4_PWM , 0          , 0}          , /* LED_NUM_LOCK: // led 13 */
-  {TML_RIGHT_ADDR , REG_D5_PWM , 0          , 0}          , /* LED_SCROLL_LOCK: // led 14 */
-  {TML_RIGHT_ADDR , REG_D6_PWM , REG_D7_PWM , REG_D8_PWM} , /* LED_M7_RGB: // led 15         , 16 , 17 */
-  {TML_RIGHT_ADDR , REG_D0_PWM , 0          , 0}          , /* LED_CNTL_M0: // led 9 */
-  {TML_RIGHT_ADDR , REG_D1_PWM , 0          , 0}          , /* LED_CNTL_M1: // led 10 */
-  {TML_RIGHT_ADDR , REG_D2_PWM , 0          , 0}          , /* LED_CNTL_M2: // led 11 */
+  {TML_LEFT_ADDR  , REG_D0_PWM , REG_D1_PWM , REG_D2_PWM} , /* LED_EXTRA_M0_RGB led 0, 1  , 2 */
+  {TML_LEFT_ADDR  , REG_D3_PWM , REG_D4_PWM , REG_D5_PWM} , /* LED_EXTRA_M1_RGB led 3, 4  , 5 */
+  {TML_LEFT_ADDR  , REG_D6_PWM , REG_D7_PWM , REG_D8_PWM} , /* LED_EXTRA_M2_RGB led 6, 7  , 8 */
+  {TML_RIGHT_ADDR , REG_D3_PWM , 0          , 0}          , /* LED_CAPS_LOCK:   led 12 */
+  {TML_RIGHT_ADDR , REG_D4_PWM , 0          , 0}          , /* LED_NUM_LOCK:    led 13 */
+  {TML_RIGHT_ADDR , REG_D5_PWM , 0          , 0}          , /* LED_SCROLL_LOCK: led 14 */
+  {TML_RIGHT_ADDR , REG_D6_PWM , REG_D7_PWM , REG_D8_PWM} , /* LED_M7_RGB:      led 15, 16 , 17 */
+  {TML_RIGHT_ADDR , REG_D0_PWM , 0          , 0}          , /* LED_CNTL_M0:     led 9 */
+  {TML_RIGHT_ADDR , REG_D1_PWM , 0          , 0}          , /* LED_CNTL_M1:     led 10 */
+  {TML_RIGHT_ADDR , REG_D2_PWM , 0          , 0}          , /* LED_CNTL_M2:     led 11 */
   {0              , 0          , 0          , 0}          , /* end */
 };
 
 void leds_efx_setLed(isokey_led_t led, uint8_t status) {
+  uprintf("set led[%u] %d\n", led, status);
   uint8_t lev = status ? default_level : 0;
   if(led_map[led].pwm0 != 0)
     lp5569_setLed(led_map[led].addr, led_map[led].pwm0, lev);
@@ -82,6 +91,14 @@ void leds_efx_levelDown(void) {
   uint8_t lev   = default_level;
   default_level = default_level < 10 ? 0 : lev - 10;
   leds_efx_update(default_level);
+}
+void leds_efx_mgr(uint8_t prog, uint8_t enable) {
+  if (enable){
+    lp5569_loadPrg(RIGHT, isokey_left, sizeof(isokey_left), addr_isokey_left, sizeof(addr_isokey_left));
+    lp5569_loadPrg(LEFT, isokey_left, sizeof(isokey_left), addr_isokey_left, sizeof(addr_isokey_left));
+    //lp5569_loadPrg(LEFT, uno, sizeof(uno), uno_addr, sizeof(uno_addr));
+  }
+
 }
 
 void leds_efx_init(void) {

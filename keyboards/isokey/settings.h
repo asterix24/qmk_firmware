@@ -34,6 +34,7 @@ enum isokey_keycodes {
   M7_SW,  // Special function
   M8_SW,  // Special function
   FN_SW,  // Special function
+  LED_EFX,// Start/strop led efx
   LOGO,   // https://isokey.asterix.cloud  > this should be always the last! <
 };
 
